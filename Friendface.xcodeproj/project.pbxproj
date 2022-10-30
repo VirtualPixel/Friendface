@@ -14,7 +14,6 @@
 		57AEBE49290D9D7D00C62A5B /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AEBE48290D9D7D00C62A5B /* Friend.swift */; };
 		57AEBE4B290D9DA500C62A5B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AEBE4A290D9DA500C62A5B /* User.swift */; };
 		57AEBE4D290DA1BC00C62A5B /* UserDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AEBE4C290DA1BC00C62A5B /* UserDetail.swift */; };
-		57AEBE4F290EC21200C62A5B /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AEBE4E290EC21200C62A5B /* Bundle-Decodable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +25,6 @@
 		57AEBE48290D9D7D00C62A5B /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		57AEBE4A290D9DA500C62A5B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		57AEBE4C290DA1BC00C62A5B /* UserDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetail.swift; sourceTree = "<group>"; };
-		57AEBE4E290EC21200C62A5B /* Bundle-Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +59,6 @@
 			children = (
 				57AEBE3A290D7BF500C62A5B /* FriendfaceApp.swift */,
 				57AEBE3C290D7BF500C62A5B /* ContentView.swift */,
-				57AEBE4E290EC21200C62A5B /* Bundle-Decodable.swift */,
 				57AEBE48290D9D7D00C62A5B /* Friend.swift */,
 				57AEBE4A290D9DA500C62A5B /* User.swift */,
 				57AEBE4C290DA1BC00C62A5B /* UserDetail.swift */,
@@ -154,7 +151,6 @@
 				57AEBE3D290D7BF500C62A5B /* ContentView.swift in Sources */,
 				57AEBE4D290DA1BC00C62A5B /* UserDetail.swift in Sources */,
 				57AEBE3B290D7BF500C62A5B /* FriendfaceApp.swift in Sources */,
-				57AEBE4F290EC21200C62A5B /* Bundle-Decodable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

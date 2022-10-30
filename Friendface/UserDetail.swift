@@ -11,47 +11,49 @@ struct UserDetail: View {
     let user: User
     
     var body: some View {
-        ScrollView {
-            VStack {
-                Group {
-                    Text("Name: \(user.name)")
-                    Image(systemName: user.isActive ? "checkmark.seal.fill" : "xmark.seal.fill")
-                    Text("Age: \(user.age)")
-                    Text("Company: \(user.company)")
-                    Text("Email: \(user.email)")
-                    Text("Address: \(user.address)")
-                    Text("About: \(user.about)")
-                    Text("Registered: \(user.registered)")
+        List {
+            Section {
+                Text("Age: \(user.age)")
+                Text("Company: \(user.company)")
+                Text("Email: \(user.email)")
+                Text("Address: \(user.address)")
+                Text("About: \(user.about)")
+                Text("Registered: \(user.registered)")
+            } header: {
+                Text("Facts")
+                    .font(.title)
+            }
+            
+            Section {
+                ForEach(user.tags, id: \.self) { tag in
+                    Text("\(tag)")
                 }
-                Spacer()
-                
+            } header: {
                 Text("Tags")
                     .font(.title)
-                
-                ForEach(user.tags, id: \.self) { tag in
-                    Text("Sum \(tag)")
-                }
-                
-                Spacer()
-                Text("Friends")
-                    .font(.title)
-                
+            }
+            
+            Section {
                 ForEach(user.friends, id: \.self) { friend in
                     HStack {
-                        Text("ID: \(friend.id)")
                         Text("\(friend.name)")
                     }
                 }
+            } header: {
+                Text("Friends")
+                    .font(.title)
             }
-            .padding()
         }
+        .padding()
+        .navigationTitle(user.name)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
-/*struct UserDetail_Previews: PreviewProvider {
+struct UserDetail_Previews: PreviewProvider {
     
     static var previews: some View {
-        UserDetail()
+        UserDetail(user: User.example)
     }
 }
-*/
+

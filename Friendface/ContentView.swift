@@ -20,24 +20,24 @@ struct ContentView: View {
                         } label: {
                             HStack {
                                 Image(systemName: user.isActive ? "checkmark.seal.fill" : "xmark.seal.fill")
+                                    .foregroundColor(user.isActive ? .green : .red)
                                 Text(user.name)
                             }
                         }
                     }
                 }
-                
-                Button("Download") {
-                    Task {
-                        await downloadUsers()
-                    }
-                }
             }
             .padding()
             .navigationTitle("JSON Downloader")
+            .task {
+                await downloadUsers()
+            }
         }
     }
     
     func downloadUsers() async {
+        guard users.isEmpty else { return }
+        
         let url = URL(string: "https://www.hackingwithswift.com/samples/friendface.json")!
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in

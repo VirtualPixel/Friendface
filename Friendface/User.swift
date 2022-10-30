@@ -8,7 +8,7 @@
 import Foundation
 
 struct User: Codable, Identifiable {
-    let id: String
+    let id: UUID
     var isActive: Bool
     let name: String
     let age: Int
@@ -19,4 +19,6 @@ struct User: Codable, Identifiable {
     let registered: String
     let tags: [String]
     let friends: [Friend]
+    
+    static let example = User(id: UUID(), isActive: true, name: "Justin Wells", age: 27, company: "Allegheny County", email: "wellsmjustin@gmail.com", address: "761 Dunster Street", about: "An iOS developer from Pittsburgh, PA.", registered: "\(Date.now)", tags: ["Nub", "Scrub", "Tub"], friends: [Friend(id: UUID(), name: "Bilbo Baggins"), Friend(id: UUID(), name: "Mumbo bumbkins")])
 }
