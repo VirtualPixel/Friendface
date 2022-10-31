@@ -28,7 +28,7 @@ struct ContentView: View {
                 }
             }
             .padding()
-            .navigationTitle("JSON Downloader")
+            .navigationTitle("Friendface")
             .task {
                 await downloadUsers()
             }
@@ -36,34 +36,45 @@ struct ContentView: View {
     }
     
     func downloadUsers() async {
-        guard users.isEmpty else { return }
-        
-        let url = URL(string: "https://www.hackingwithswift.com/samples/friendface.json")!
-        
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+        await MainActor.run {
+            guard users.isEmpty else { return }
             
-            // ensure no error for the HTTP response
-            guard error == nil else {
-                print("Error: \(error!)")
-                return
+            let url = URL(string: "https://www.hackingwithswift.com/samples/friendface.json")!
+            
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                
+                // ensure no error for the HTTP response
+                guard error == nil else {
+                    print("Error: \(error!)")
+                    return
+                }
+                
+                // ensure there is data returned from this HTTP response
+                guard let data = data else {
+                    print("No data")
+                    return
+                }
+                
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                
+                // Parse JSON into array of User structs using JSONDecoder
+                guard let theusers = try? decoder.decode([User].self, from: data) else {
+                    print("Error: Couldn't decode into users array.")
+                    return
+                }
+                
+                guard users != theusers else {
+                    print("No new data to set.")
+                    return
+                }
+                
+                users = theusers
+                print("New data has been set.")
             }
             
-            // ensure there is data returned from this HTTP response
-            guard let data = data else {
-                print("No data")
-                return
-            }
-            
-            // Parse JSON into array of User structs using JSONDecoder
-            guard let theusers = try? JSONDecoder().decode([User].self, from: data) else {
-                print("Error: Couldn't decode into users array.")
-                return
-            }
-            
-            users = theusers
+            task.resume()
         }
-        
-        task.resume()
     }
 }
 
