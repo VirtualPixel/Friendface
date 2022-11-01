@@ -8,24 +8,24 @@
 import SwiftUI
 
 struct UserDetail: View {
-    let user: User
+    let user: CachedUser
     
     var body: some View {
         List {
             Section {
-                Text("Age: \(user.age)")
-                Text("Company: \(user.company)")
-                Text("Email: \(user.email)")
-                Text("Address: \(user.address)")
-                Text("About: \(user.about)")
-                Text("Registered: \(user.registered)")
+                Text("Age: \(user.wrappedAge)")
+                Text("Company: \(user.wrappedCompany)")
+                Text("Email: \(user.wrappedEmail)")
+                Text("Address: \(user.wrappedAddress)")
+                Text("About: \(user.wrappedAbout)")
+                Text("Registered: \(user.wrappedRegistered)")
             } header: {
                 Text("Facts")
                     .font(.title)
             }
             
             Section {
-                ForEach(user.tags, id: \.self) { tag in
+                ForEach(user.wrappedTags, id: \.self) { tag in
                     Text("\(tag)")
                 }
             } header: {
@@ -34,9 +34,9 @@ struct UserDetail: View {
             }
             
             Section {
-                ForEach(user.friends, id: \.self) { friend in
+                ForEach(user.wrappedFriends, id: \.self) { friend in
                     HStack {
-                        Text("\(friend.name)")
+                        Text("\(friend.wrappedName)")
                     }
                 }
             } header: {
@@ -45,7 +45,7 @@ struct UserDetail: View {
             }
         }
         .padding()
-        .navigationTitle(user.name)
+        .navigationTitle(user.wrappedName)
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -53,7 +53,7 @@ struct UserDetail: View {
 struct UserDetail_Previews: PreviewProvider {
     
     static var previews: some View {
-        UserDetail(user: User.example)
+        UserDetail(user: CachedUser.example)
     }
 }
 

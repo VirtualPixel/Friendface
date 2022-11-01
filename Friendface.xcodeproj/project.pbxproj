@@ -19,6 +19,7 @@
 		57AEBE58290FD10300C62A5B /* CachedUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AEBE54290FD10300C62A5B /* CachedUser+CoreDataProperties.swift */; };
 		57AEBE59290FD10300C62A5B /* CachedFriend+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AEBE55290FD10300C62A5B /* CachedFriend+CoreDataClass.swift */; };
 		57AEBE5A290FD10300C62A5B /* CachedFriend+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AEBE56290FD10300C62A5B /* CachedFriend+CoreDataProperties.swift */; };
+		57AEBE5C290FD5D800C62A5B /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AEBE5B290FD5D800C62A5B /* DataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		57AEBE54290FD10300C62A5B /* CachedUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CachedUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		57AEBE55290FD10300C62A5B /* CachedFriend+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CachedFriend+CoreDataClass.swift"; sourceTree = "<group>"; };
 		57AEBE56290FD10300C62A5B /* CachedFriend+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CachedFriend+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		57AEBE5B290FD5D800C62A5B /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				57AEBE3A290D7BF500C62A5B /* FriendfaceApp.swift */,
 				57AEBE3C290D7BF500C62A5B /* ContentView.swift */,
 				57AEBE50290FCEAE00C62A5B /* Friendface.xcdatamodeld */,
+				57AEBE5B290FD5D800C62A5B /* DataController.swift */,
 				57AEBE48290D9D7D00C62A5B /* Friend.swift */,
 				57AEBE4A290D9DA500C62A5B /* User.swift */,
 				57AEBE4C290DA1BC00C62A5B /* UserDetail.swift */,
@@ -166,6 +169,7 @@
 				57AEBE58290FD10300C62A5B /* CachedUser+CoreDataProperties.swift in Sources */,
 				57AEBE52290FCEAE00C62A5B /* Friendface.xcdatamodeld in Sources */,
 				57AEBE4B290D9DA500C62A5B /* User.swift in Sources */,
+				57AEBE5C290FD5D800C62A5B /* DataController.swift in Sources */,
 				57AEBE49290D9D7D00C62A5B /* Friend.swift in Sources */,
 				57AEBE3D290D7BF500C62A5B /* ContentView.swift in Sources */,
 				57AEBE4D290DA1BC00C62A5B /* UserDetail.swift in Sources */,

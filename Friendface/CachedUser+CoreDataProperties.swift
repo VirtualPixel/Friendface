@@ -22,6 +22,7 @@ extension CachedUser {
     @NSManaged public var age: Int16
     @NSManaged public var company: String?
     @NSManaged public var email: String?
+    @NSManaged public var address: String?
     @NSManaged public var about: String?
     @NSManaged public var registered: Date?
     @NSManaged public var tags: [String]?
@@ -51,6 +52,10 @@ extension CachedUser {
         email ?? "UNKNOWN"
     }
     
+    public var wrappedAddress: String {
+        address ?? "UNKNOWN"
+    }
+    
     public var wrappedAbout: String {
         about ?? "UNKNOWN"
     }
@@ -66,6 +71,8 @@ extension CachedUser {
     public var wrappedFriends: [CachedFriend] {
         friends ?? []
     }
+    
+    public static let example = CachedUser()
 
 }
 
