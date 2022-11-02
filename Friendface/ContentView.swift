@@ -76,7 +76,6 @@ struct ContentView: View {
                 let cachedFriend = CachedFriend(context: moc)
                 cachedFriend.id = friend.id
                 cachedFriend.name = friend.name
-                
                 cachedUser.addToFriends(cachedFriend)
             }
             

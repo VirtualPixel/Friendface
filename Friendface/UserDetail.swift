@@ -40,11 +40,3 @@ struct UserDetail: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
-
-struct UserDetail_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        UserDetail(user: CachedUser.example)
-    }
-}
-
