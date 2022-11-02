@@ -25,16 +25,7 @@ struct UserDetail: View {
             }
             
             Section {
-                ForEach(user.wrappedTags, id: \.self) { tag in
-                    Text("\(tag)")
-                }
-            } header: {
-                Text("Tags")
-                    .font(.title)
-            }
-            
-            Section {
-                ForEach(user.wrappedFriends, id: \.self) { friend in
+                ForEach(user.friendsArray, id: \.self) { friend in
                     HStack {
                         Text("\(friend.wrappedName)")
                     }

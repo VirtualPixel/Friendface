@@ -2,7 +2,7 @@
 //  CachedFriend+CoreDataProperties.swift
 //  Friendface
 //
-//  Created by Justin Wells on 10/31/22.
+//  Created by Justin Wells on 11/2/22.
 //
 //
 
@@ -18,15 +18,33 @@ extension CachedFriend {
 
     @NSManaged public var id: UUID?
     @NSManaged public var name: String?
-
-    public var wrappedId: UUID {
+    @NSManaged public var user: CachedUser?
+    
+    var wrappedId: UUID {
         id ?? UUID()
     }
     
-    public var wrappedName: String {
-        name ?? "Unknown"
+    var wrappedName: String {
+        name ?? ""
     }
-    
+
+}
+
+// MARK: Generated accessors for user
+extension CachedFriend {
+
+    @objc(addUserObject:)
+    @NSManaged public func addToUser(_ value: CachedUser)
+
+    @objc(removeUserObject:)
+    @NSManaged public func removeFromUser(_ value: CachedUser)
+
+    @objc(addUser:)
+    @NSManaged public func addToUser(_ values: NSSet)
+
+    @objc(removeUser:)
+    @NSManaged public func removeFromUser(_ values: NSSet)
+
 }
 
 extension CachedFriend : Identifiable {

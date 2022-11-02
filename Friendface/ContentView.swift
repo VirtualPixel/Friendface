@@ -10,8 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(sortDescriptors: []) var users: FetchedResults<CachedUser>
-    @State private var downloadedUsers: [User] = []
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var users: FetchedResults<CachedUser>
     
     var body: some View {
         NavigationView {
@@ -40,85 +39,50 @@ struct ContentView: View {
     }
     
     func downloadUsers() async {
-        await MainActor.run {
-            guard users.isEmpty else { return }
-            
+        guard users.isEmpty else { return }
+        
+        do {
             let url = URL(string: "https://www.hackingwithswift.com/samples/friendface.json")!
+            let (data, _) = try await URLSession.shared.data(from: url)
             
-            let task = URLSession.shared.dataTask(with: url) { data, response, error in
-                // ensure no error for the HTTP response
-                guard error == nil else {
-                    print("Error: \(error!)")
-                    return
-                }
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            let users = try decoder.decode([User].self, from: data)
+            
+            await MainActor.run {
+                updateCache(with: users)
+            }
+        } catch {
+            print("Download failed")
+        }
+    }
+    
+    func updateCache(with downloadedUsers: [User]) {
+        for user in downloadedUsers {
+            let cachedUser = CachedUser(context: moc)
+            
+            cachedUser.id = user.id
+            cachedUser.isActive = user.isActive
+            cachedUser.name = user.name
+            cachedUser.age = Int16(user.age)
+            cachedUser.company = user.company
+            cachedUser.email = user.email
+            cachedUser.address = user.address
+            cachedUser.about = user.about
+            cachedUser.registered = user.registered
+            cachedUser.tags = user.tags.joined(separator: ",")
+            
+            for friend in user.friends {
+                let cachedFriend = CachedFriend(context: moc)
+                cachedFriend.id = friend.id
+                cachedFriend.name = friend.name
                 
-                // ensure there is data returned from this HTTP response
-                guard let data = data else {
-                    print("No data")
-                    return
-                }
-                
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .iso8601
-
-                
-                // Parse JSON into array of User structs using JSONDecoder
-                guard let downloadedUsers = try? decoder.decode([User].self, from: data) else {
-                    print("Error: Couldn't decode into users array.")
-                    return
-                }
-                
-                // Check if changes need made
-                /*guard users != theusers else {
-                    print("No new data to set.")
-                    return
-                }*/
-                
-                // Set users to downloaded users
-                self.downloadedUsers = downloadedUsers
-                
-                print("New data has been set.")
-                
-                var allUsers: [CachedUser] = []
-                
-                for entry in downloadedUsers {
-                    let user = CachedUser(context: moc)
-                    var friends: [CachedFriend] = []
-                    
-                    for friend in entry.friends {
-                        let newFriend = CachedFriend(context: moc)
-                        
-                        newFriend.id = friend.id
-                        newFriend.name = friend.name
-                                                
-                        friends.append(newFriend)
-                    }
-                    
-                    user.id = entry.id
-                    user.isActive = entry.isActive
-                    user.name = entry.name
-                    user.age = Int16(entry.age)
-                    user.company = entry.company
-                    user.email = entry.email
-                    user.address = entry.address
-                    user.about = entry.about
-                    user.registered = entry.registered
-                    user.tags = entry.tags
-                    user.friends = friends
-                    
-                    for friend in user.wrappedFriends {
-                        print("\(user.wrappedName) friend's name is \(friend.wrappedName)")
-                    }
-                    
-                    allUsers.append(user)
-                }
-                
-                try? moc.save()
-                
+                cachedUser.addToFriends(cachedFriend)
             }
             
-            task.resume()
         }
+        
+        try? moc.save()
     }
 }
 
